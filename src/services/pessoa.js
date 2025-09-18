@@ -1,8 +1,14 @@
-// import databaseConnection from '../utils/database'
-import Pessoa from '../models/pessoa'
+const { Pessoa } = require('../models');
+
+// export const listPessoas = async (req, res) => {
+//   const pessoas = await Pessoa.findAll();
+//   return pessoas
+// }
 
 export const listPessoas = async (req, res) => {
-  const pessoas = await Pessoa.findAll();
+  const pessoas = await Pessoa.findAll({
+    order: [['nome', 'ASC']] // ASC para crescente, DESC para decrescente
+  });
   return pessoas
 }
 

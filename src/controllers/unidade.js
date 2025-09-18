@@ -1,16 +1,17 @@
 import { Router } from 'express'
 import Unidade from '../models/unidade'
+import { autenticarToken } from '../middleware/authMiddleware';
 
 import { buscaUnidade, deleteUnidade, listUnidades, createUnidade, updateUnidade } from '../services/unidade'
 
 const router = Router()
 
-router.get('/', async (req, res) => {
+router.get('/', autenticarToken, async (req, res) => {
   const unidadeList = await listUnidades()
   res.send(unidadeList)
 })
 
-router.get('/:unidadeId', async (req, res) => {
+router.get('/:unidadeId', autenticarToken, async (req, res) => {
   try {
     const unidade = await buscaUnidade(req.params.unidadeId)
     res.status(200).send(unidade)
@@ -19,7 +20,7 @@ router.get('/:unidadeId', async (req, res) => {
   }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', autenticarToken, async (req, res) => {
   console.log(req.body)
 
   try {
@@ -32,7 +33,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.put('/:unidadeId', (req, res) => {
+router.put('/:unidadeId', autenticarToken, (req, res) => {
   const id = parseInt(req.params.unidadeId)
 
   try {
@@ -43,7 +44,7 @@ router.put('/:unidadeId', (req, res) => {
   }
 })
 
-router.delete('/:unidadeId', async (req, res) => {
+router.delete('/:unidadeId', autenticarToken, async (req, res) => {
 
   try {
     await deleteUnidade(req.params.unidadeId)

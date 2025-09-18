@@ -1,16 +1,21 @@
 import { Router } from 'express'
 import Pessoa from '../models/pessoa'
+import { autenticarToken } from '../middleware/authMiddleware';
 
 import { buscaPessoa, deletePessoa, listPessoas, createPessoa, updatePessoa } from '../services/pessoa'
 
 const router = Router()
 
-router.get('/', async (req, res) => {
-  const pessoaList = await listPessoas()
-  res.send(pessoaList)
+router.get('/', autenticarToken, async (req, res) => {
+  try {
+    const pessoaList = await listPessoas()
+    res.status(200).send(pessoaList)
+  } catch (error) {
+    res.status(403).json({ message: 'Acesso não autorizado! Faça login novamente.' })
+  }
 })
 
-router.get('/:pessoaId', async (req, res) => {
+router.get('/:pessoaId', autenticarToken, async (req, res) => {
   try {
     const pessoa = await buscaPessoa(req.params.pessoaId)
     res.status(200).send(pessoa)
@@ -19,7 +24,7 @@ router.get('/:pessoaId', async (req, res) => {
   }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', autenticarToken, async (req, res) => {
   console.log(req.body)
 
   try {
@@ -32,7 +37,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.put('/:pessoaId', (req, res) => {
+router.put('/:pessoaId', autenticarToken, (req, res) => {
   const id = parseInt(req.params.pessoaId)
 
   try {
@@ -43,7 +48,7 @@ router.put('/:pessoaId', (req, res) => {
   }
 })
 
-router.delete('/:pessoaId', async (req, res) => {
+router.delete('/:pessoaId', autenticarToken, async (req, res) => {
 
   try {
     await deletePessoa(req.params.pessoaId)

@@ -1,5 +1,5 @@
-// import databaseConnection from '../utils/database'
-import Unidade from '../models/unidade'
+// import Unidade from '../models/unidade'
+const { Unidade } = require('../models');
 
 export const listUnidades = async (req, res) => {
   const unidades = await Unidade.findAll();

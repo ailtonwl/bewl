@@ -1,4 +1,6 @@
-// import databaseConnection from '../utils/database'
+// src/services/user.js
+
+import jwt from 'jsonwebtoken'
 import User from '../models/user'
 
 export const listUsers = async (req, res) => {
@@ -7,9 +9,8 @@ export const listUsers = async (req, res) => {
 }
 
 export const createUser = async (user) => {
-  const createdUser = await User.create(user)
 
-  console.log(createdUser)
+  const createdUser = await User.create(user)
 
   return createdUser
 }

@@ -1,28 +1,32 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Unidade = sequelize.define('Unidade', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  sigla: {
-    type: DataTypes.STRING(5), // Define o tamanho máximo do campo nome como 5 caracteres
-    allowNull: false
-  },
-  descricao: {
-    type: DataTypes.STRING(100), // Define o tamanho máximo do campo nome como 100 caracteres
-    allowNull: false
-  },
-  ativo: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false
-  }
-},
-  {
-    timestamps: true // Adiciona createdAt e updatedAt automaticamente
-  }
-);
+module.exports = (sequelize, DataTypes) => {
+  const Unidade = sequelize.define('Unidade', {
+    sigla: {
+      type: DataTypes.STRING(5),
+      allowNull: false
+    },
+    descricao: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    ativo: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+    }
+  }, {
+    timestamps: true,
+    freezeTableName: true
 
-module.exports = Unidade;
+  });
+
+  Unidade.associate = (models) => {
+    Unidade.hasMany(models.Produto, {
+      foreignKey: 'unidadeId',
+      as: 'produto'
+    });
+  };
+
+  return Unidade;
+};

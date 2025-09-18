@@ -1,16 +1,17 @@
 import { Router } from 'express'
 import Produto from '../models/produto'
+import { autenticarToken } from '../middleware/authMiddleware';
 
 import { buscaProduto, deleteProduto, listProdutos, createProduto, updateProduto } from '../services/produto'
 
 const router = Router()
 
-router.get('/', async (req, res) => {
+router.get('/', autenticarToken, async (req, res) => {
   const produtoList = await listProdutos()
   res.send(produtoList)
 })
 
-router.get('/:produtoId', async (req, res) => {
+router.get('/:produtoId', autenticarToken, async (req, res) => {
   try {
     const produto = await buscaProduto(req.params.produtoId)
     res.status(200).send(produto)
@@ -19,7 +20,7 @@ router.get('/:produtoId', async (req, res) => {
   }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', autenticarToken, async (req, res) => {
   console.log(req.body)
 
   try {
@@ -32,7 +33,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.put('/:produtoId', (req, res) => {
+router.put('/:produtoId', autenticarToken, (req, res) => {
   const id = parseInt(req.params.produtoId)
 
   try {
@@ -43,7 +44,7 @@ router.put('/:produtoId', (req, res) => {
   }
 })
 
-router.delete('/:produtoId', async (req, res) => {
+router.delete('/:produtoId', autenticarToken, async (req, res) => {
 
   try {
     await deleteProduto(req.params.produtoId)
