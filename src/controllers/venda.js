@@ -3,6 +3,7 @@ import Venda from '../models/venda'
 import { autenticarToken } from '../middleware/authMiddleware';
 
 import { buscaVenda, deleteVenda, listVendas, createVenda, updateVenda } from '../services/venda'
+import { updateVendaRec } from '../services/venda'
 
 const router = Router()
 
@@ -42,6 +43,22 @@ router.put('/:vendaId', autenticarToken, (req, res) => {
   } catch (error) {
     res.status(401).json({ message: 'Venda não encontrada' })
   }
+})
+
+router.put('/receb/:vendaId', (req, res) => {
+  const id = parseInt(req.params.vendaId)
+
+  console.log('Cheguei /receb/id', id);
+  console.log('req: ', req);
+
+  updateVendaRec(id, req, res)
+
+  // try {
+  //   const venda = updateVendaRec(id, req, res)
+  // res.status(200).send(venda)
+  // } catch (error) {
+  // res.status(401).json({ message: 'Venda não encontrada' })
+  // }
 })
 
 router.delete('/:vendaId', autenticarToken, (req, res) => {

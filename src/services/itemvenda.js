@@ -9,8 +9,6 @@ export const createItemVenda = async (itemVenda) => {
 
   const createdItemVenda = await ItemVenda.create(itemVenda)
 
-  console.log(createdItemVenda)
-
   return createdItemVenda
 }
 
@@ -22,8 +20,6 @@ export const updateItemVenda = async (id, req, res) => {
       where: { id },
     },
   );
-
-  console.log(updatedItemVenda)
 
   return updateItemVenda
 }
@@ -42,4 +38,3 @@ export const deleteItemVenda = async (id) => {
     where: { id }
   })
 }
-
