@@ -18,4 +18,5 @@ export function autenticarToken(req, res, next) {
     req.user = decoded; // agora você tem acesso ao ID do usuário
     next();
   });
+  // next();  // tirar essa linha depois de testar logar na web 07/10/2025
 }

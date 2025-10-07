@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import ItemVenda from '../models/itemVenda'
+import ItemVenda from '../models/itemvenda'
 
-import { buscaItemVenda, deleteItemVenda, listItemVendas, createItemVenda, updateItemVenda } from '../services/itemVenda'
+import { buscaItemVenda, deleteItemVenda, listItemVendas, createItemVenda, updateItemVenda } from '../services/itemvenda'
 
 const router = Router()
 

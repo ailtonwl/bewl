@@ -1,8 +1,8 @@
 // src/controllers/itemcompra.js
 import { Router } from 'express'
-import ItemCompra from '../models/itemCompra'
+import ItemCompra from '../models/itemcompra'
 
-import { buscaItemCompra, deleteItemCompra, listItemCompras, createItemCompra, updateItemCompra } from '../services/itemCompra'
+import { buscaItemCompra, deleteItemCompra, listItemCompras, createItemCompra, updateItemCompra } from '../services/itemcompra'
 
 const router = Router()
 

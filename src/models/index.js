@@ -8,16 +8,16 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.Produto = require('./Produto')(sequelize, DataTypes);
-db.Unidade = require('./Unidade')(sequelize, DataTypes);
-db.Pessoa = require('./Pessoa')(sequelize, DataTypes);
-db.Compra = require('./Compra')(sequelize, DataTypes);
-db.ItemCompra = require('./ItemCompra')(sequelize, DataTypes);
-db.Venda = require('./Venda')(sequelize, DataTypes);
-db.ItemVenda = require('./ItemVenda')(sequelize, DataTypes);
-db.Recebimento = require('./Recebimento')(sequelize, DataTypes);
-db.ReajEstoque = require('./ReajEstoque')(sequelize, DataTypes);
-db.ItemReajEstoque = require('./ItemReajEstoque')(sequelize, DataTypes);
+db.Produto = require('./produto')(sequelize, DataTypes);
+db.Unidade = require('./unidade')(sequelize, DataTypes);
+db.Pessoa = require('./pessoa')(sequelize, DataTypes);
+db.Compra = require('./compra')(sequelize, DataTypes);
+db.ItemCompra = require('./itemcompra')(sequelize, DataTypes);
+db.Venda = require('./venda')(sequelize, DataTypes);
+db.ItemVenda = require('./itemvenda')(sequelize, DataTypes);
+db.Recebimento = require('./recebimento')(sequelize, DataTypes);
+db.ReajEstoque = require('./reajestoque')(sequelize, DataTypes);
+db.ItemReajEstoque = require('./itemreajestoque')(sequelize, DataTypes);
 
 // Aplica as associações
 Object.keys(db).forEach((modelName) => {

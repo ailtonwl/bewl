@@ -4,7 +4,7 @@ class Config {
     this.PORT = process.env.PORT || 8080
     this.API_BASE = '/'
     this.DATABASE_HOST = 'localhost'
-    this.DATABASE_PORT = process.env.DATABASE_PORT || 5433
+    this.DATABASE_PORT = process.env.DATABASE_PORT || 5432
     this.DATABASE = 'wlvendas'
     this.DATABASE_USERNAME = 'postgres'
     this.DATABASE_PASSWORD = 'root'

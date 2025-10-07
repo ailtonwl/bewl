@@ -6,7 +6,7 @@ const pool = new Pool({
   host: 'localhost',
   database: 'wlvendas',
   password: 'root',
-  port: 5433,
+  port: 5432,
 });
 
 const databaseConnection = async () => {

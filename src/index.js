@@ -1,11 +1,9 @@
+// src/index.js
 import express from 'express'
 import sequelize from './config/database'
-// import config from './config/env/development'
-
-import User from './models/user'
 import cors from 'cors'
 
-// import bodyParser from 'body-parser'
+import User from './models/user'
 
 import userController from './controllers/user'
 import pessoaController from './controllers/pessoa'
@@ -18,20 +16,27 @@ import itemVendaController from './controllers/itemvenda'
 import recebimentoController from './controllers/recebimento'
 import reajEstoqueController from './controllers/reajestoque'
 import itemReajEstoqueController from './controllers/itemreajestoque'
-// import authController from './controllers/auth'
 
 const app = express()
 const port = 8080
 
-// app.use(bodyParser.json())
-
 app.use(express.json())
-app.use(cors({
-  // origin: '*'
-  origin: 'http://localhost:5173',
-  credentials: true, // token in cookie
-  methods: 'GET,PUT,POST,OPTIONS, DELETE'
-}))
+
+const allowedOrigin = 'http://189.126.106.253:5173'
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true)
+    if (origin === allowedOrigin) return callback(null, true)
+    return callback(new Error('Origin not allowed by CORS'))
+  },
+  credentials: true,
+  methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}
+
+app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))
 
 // Sincronizar o banco de dados
 sequelize.sync()
@@ -39,7 +44,6 @@ sequelize.sync()
   .catch(err => console.error('Erro ao sincronizar o banco de dados:', err));
 
 app.use('/user', userController)
-// app.use('/signin', authController)
 app.use('/pessoa', pessoaController)
 app.use('/unidade', unidadeController)
 app.use('/produto', produtoController)
@@ -49,8 +53,8 @@ app.use('/venda', vendaController)
 app.use('/itemvenda', itemVendaController)
 app.use('/recebimento', recebimentoController)
 app.use('/reajestoque', reajEstoqueController)
-app.use('/itemreajestoque', itemVendaController)
+app.use('/itemreajestoque', itemReajEstoqueController)
 
-app.listen(port, () => {
-  console.log(`App rodando em http://localhost:${port}`)
+app.listen(port, '0.0.0.0', () => {
+  console.log(`App rodando em http://0.0.0.0:${port}`)
 })

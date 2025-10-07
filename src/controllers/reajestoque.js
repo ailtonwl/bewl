@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import ReajEstoque from '../models/reajEstoque'
+import ReajEstoque from '../models/reajestoque'
 
-import { buscaReajEstoque, deleteReajEstoque, listReajEstoques, createReajEstoque, updateReajEstoque } from '../services/reajEstoque'
+import { buscaReajEstoque, deleteReajEstoque, listReajEstoques, createReajEstoque, updateReajEstoque } from '../services/reajestoque'
 
 const router = Router()
 
