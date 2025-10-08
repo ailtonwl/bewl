@@ -4,15 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/index.js",
-    "build": "babel src --out-dir dist",
-    "start": "node dist/index.js"
+    "build": "rimraf ./build",    "dev": "babel-node src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@sequelize/core": "^7.0.0-alpha.46",
+    "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "bcrypt": "^5.1.1",
     "body-parser": "^2.2.0",
@@ -24,10 +23,9 @@
     "sequelize": "^6.37.7"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.4",
+    "@babel/core": "^7.28.0",
     "@babel/node": "^7.28.0",
-    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-env": "^7.28.0",
     "nodemon": "^2.0.20"
   }
 }
